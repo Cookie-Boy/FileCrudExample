@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "1aae5021-e408-49bc-b493-3f2d2781f3d0",
+		"name": "FileCrudExample",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40435137"
+	},
+	"item": [
+		{
+			"name": "Get all cars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get cars with filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/cars?mark=Toyota",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "mark",
+							"value": "Toyota"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to get cars with wrong filter",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars?invalid_field=some_value",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					],
+					"query": [
+						{
+							"key": "invalid_field",
+							"value": "some_value"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add car",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 16,\r\n        \"model\": \"2112\",\r\n        \"mark\": \"ВАЗ\",\r\n        \"year\": 2002,\r\n        \"price\": 120000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add multiple cars",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": 17,\r\n        \"model\": \"2112\",\r\n        \"mark\": \"ВАЗ\",\r\n        \"year\": 2003,\r\n        \"price\": 130000\r\n    },\r\n    {\r\n        \"id\": 18,\r\n        \"model\": \"2110\",\r\n        \"mark\": \"ВАЗ\",\r\n        \"year\": 2002,\r\n        \"price\": 100000\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to add car with existing id",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 1,\r\n        \"model\": \"2112\",\r\n        \"mark\": \"ВАЗ\",\r\n        \"year\": 2002,\r\n        \"price\": 120000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to add car with wrong fields",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 19,\r\n        \"model\": \"2112\",\r\n        \"mark\": \"ВАЗ\",\r\n        \"year\": \"wrong_string\",\r\n        \"price\": 120000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update car",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 1,\r\n        \"year\": 1998,\r\n        \"price\": 400000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to update car with non-existent id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 100,\r\n        \"year\": 1998,\r\n        \"price\": 400000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to update car with wring fileds",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 1,\r\n        \"year\": \"wrong_string\",\r\n        \"price\": 400000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars/15",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Try to delete car with non-existent id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/cars/200",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"cars",
+						"200"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,74 @@
+{
+  "basicConstraints": 42,
+  "criticalExtensionOIDs": [
+    "risus",
+    "convallis",
+    "consectetur"
+  ],
+  "extendedKeyUsage": [
+    "lorem",
+    "nibh",
+    "Fusce"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "molestie"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Alta",
+      "type": 56
+    }
+  ],
+  "issuerDN": {
+    "commonName": "a",
+    "name": "Cristobal"
+  },
+  "issuerUniqueID": [
+    false,
+    false,
+    true
+  ],
+  "issuerX500Principal": {
+    "name": "Alleen"
+  },
+  "keyUsage": [
+    false,
+    true
+  ],
+  "name": "Amiee",
+  "nonCriticalExtensionOIDs": [
+    "eros",
+    "Lorem",
+    "consectetur"
+  ],
+  "publicKey": {
+    "algorithm": "at",
+    "modulus": 2,
+    "params": 95,
+    "publicKey": "convallis"
+  },
+  "serialNumber": 24,
+  "serialNumberObject": {
+    "serialNumber": 40
+  },
+  "sigAlgName": "consectetur",
+  "sigAlgOID": "eget",
+  "subjectAlternativeNames": [
+    {
+      "name": "Burt",
+      "type": 56
+    }
+  ],
+  "subjectDN": {
+    "commonName": "ut",
+    "name": "Alesia"
+  },
+  "subjectX500Principal": {
+    "name": "Cortez"
+  },
+  "type": "lorem",
+  "version": 96
+}

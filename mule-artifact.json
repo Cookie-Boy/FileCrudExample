@@ -1,0 +1,12 @@
+{
+  "minMuleVersion": "4.8.0",
+  "javaSpecificationVersions": [
+    "17"
+  ],
+  "propertySources": [
+    "classpath:conf/local.yaml"
+  ],
+  "properties": {
+    "app.work_dir": "src/resources"
+  }
+}

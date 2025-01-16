@@ -1,0 +1,72 @@
+{
+  "basicConstraints": 32,
+  "criticalExtensionOIDs": [
+    "ut",
+    "amet"
+  ],
+  "extendedKeyUsage": [
+    "sed",
+    "sodales",
+    "eget"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "elit"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Chuck",
+      "type": 87
+    }
+  ],
+  "issuerDN": {
+    "commonName": "Lorem",
+    "name": "Adele"
+  },
+  "issuerUniqueID": [
+    true,
+    false
+  ],
+  "issuerX500Principal": {
+    "name": "Cruz"
+  },
+  "keyUsage": [
+    false,
+    true,
+    true
+  ],
+  "name": "Almeda",
+  "nonCriticalExtensionOIDs": [
+    "Nam",
+    "dictum"
+  ],
+  "publicKey": {
+    "algorithm": "ut",
+    "modulus": 0,
+    "params": 84,
+    "publicKey": "faucibus"
+  },
+  "serialNumber": 40,
+  "serialNumberObject": {
+    "serialNumber": 46
+  },
+  "sigAlgName": "dui",
+  "sigAlgOID": "libero",
+  "subjectAlternativeNames": [
+    {
+      "name": "Adella",
+      "type": 48
+    }
+  ],
+  "subjectDN": {
+    "commonName": "adipiscing",
+    "name": "Aileen"
+  },
+  "subjectX500Principal": {
+    "name": "Alisa"
+  },
+  "type": "convallis",
+  "version": 79
+}

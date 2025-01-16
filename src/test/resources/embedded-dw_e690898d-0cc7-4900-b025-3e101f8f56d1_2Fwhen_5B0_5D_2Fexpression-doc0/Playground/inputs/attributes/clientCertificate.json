@@ -1,0 +1,72 @@
+{
+  "basicConstraints": 5,
+  "criticalExtensionOIDs": [
+    "aliquam",
+    "a"
+  ],
+  "extendedKeyUsage": [
+    "sed",
+    "elit"
+  ],
+  "extensions": [
+    {
+      "criticality": false,
+      "oid": "In"
+    }
+  ],
+  "issuerAlternativeNames": [
+    {
+      "name": "Adolph",
+      "type": 51
+    }
+  ],
+  "issuerDN": {
+    "commonName": "tempor",
+    "name": "Carlos"
+  },
+  "issuerUniqueID": [
+    true,
+    true
+  ],
+  "issuerX500Principal": {
+    "name": "Allan"
+  },
+  "keyUsage": [
+    true,
+    false,
+    true
+  ],
+  "name": "Alayna",
+  "nonCriticalExtensionOIDs": [
+    "dolor",
+    "nibh",
+    "Nam"
+  ],
+  "publicKey": {
+    "algorithm": "aliquam",
+    "modulus": 44,
+    "params": 2,
+    "publicKey": "faucibus"
+  },
+  "serialNumber": 95,
+  "serialNumberObject": {
+    "serialNumber": 37
+  },
+  "sigAlgName": "eros",
+  "sigAlgOID": "sodales",
+  "subjectAlternativeNames": [
+    {
+      "name": "Alfred",
+      "type": 95
+    }
+  ],
+  "subjectDN": {
+    "commonName": "dui",
+    "name": "Altagracia"
+  },
+  "subjectX500Principal": {
+    "name": "Dallas"
+  },
+  "type": "at",
+  "version": 59
+}

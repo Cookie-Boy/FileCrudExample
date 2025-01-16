@@ -1,0 +1,7 @@
+app:
+  directory: D:/Programs/studio-workspace/filecrudexmaple/src/main/resources
+  json_file_path: data/cars.json
+    
+logging:
+  level: INFO
+  file: logs/application.log

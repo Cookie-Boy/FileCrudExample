@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<sub-flow name="deleteSubFlow" doc:id="fbc3d58c-6fc4-44ef-82d3-56f55eb76dcd" >
+		<set-variable value="#[attributes.uriParams.id as Number]" doc:name="id" doc:id="5ae30271-2122-478f-839c-c5a92a84355b" variableName="id" />
+		<file:read doc:name="Read cars" doc:id="6f492991-41a7-4ac2-a02f-2b3b53fed809" path="#[p('app.json_file_path')]" config-ref="File_Config" />
+		<logger level="INFO" doc:name="[INFO] Start of ID validation" doc:id="6fff4ed9-01c1-4d94-8931-c2cd3bec19a0" message="[DELETE_METHOD] Start of ID validation"/>
+		<choice doc:name="Id validaton" doc:id="115fef6f-e1f3-4658-adfb-6a4cd869f802">
+			<when expression="#[!((payload as Array).id contains vars.id)]">
+				<set-variable value="404" doc:name="httpStatus" doc:id="4c55690b-8a5c-4a0f-99e6-8c0dffc31567" variableName="httpStatus" />
+				<raise-error doc:name="Id doesn't exist error" doc:id="1c9a8f6d-706d-4ed4-afef-e7b2b2cd2f2f" type="VALIDATION:ID_DOES_NOT_EXIST" description="#[&quot;Item with ID &quot; ++ vars.id ++&quot; doesn't exist&quot;]" />
+			</when>
+		</choice>
+		<logger level="INFO" doc:name="[INFO] End of ID validation" doc:id="6323a62e-6b23-4f77-a34b-f6577eebc05e" message="[DELETE_METHOD] End of ID validation" />
+		<set-variable value="#[output application/json
+---
+(payload as Array filter (item, index) -&gt; (item.id == vars.id))[0]]" doc:name="carForDeletion" doc:id="1a5b2bee-8b3c-449a-9171-b985f351e59e" variableName="carForDeletion" />
+		<logger level="INFO" doc:name="[INFO] Found car for deletion" doc:id="71425435-6032-45c2-80fa-aeaf473fdb57" message="Found car for deletion: #[vars.carForDeletion]"/>
+		<set-payload value="#[output application/json&#10;---&#10;payload as Array - vars.carForDeletion]" doc:name="Delete car" doc:id="7035e506-51f6-4d60-a537-f4b58ebdd6de" />
+		<file:write doc:name="Write cars" doc:id="3e9f0298-d5d4-4f62-85cb-30490cc1b155" path="#[p('app.json_file_path')]" config-ref="File_Config" />
+		<set-payload value="#[vars.carForDeletion]" doc:name="Set result" doc:id="ec801acb-c4bf-42e3-91ec-eba796427f60" />
+	</sub-flow>
+</mule>

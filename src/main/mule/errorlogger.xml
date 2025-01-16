@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<sub-flow name="errorLogger" doc:id="7746494b-205d-474e-84ef-5ad3a5f48d12" >
+		<logger level="ERROR" doc:name="ErrorLoger" doc:id="1dc09ca3-021b-4008-936d-08c83995de8a" message="#[{&#10;	&quot;error_name&quot;: &quot;#[error.errorType]&quot;,&#10;	&quot;error_message&quot;: &quot;#[error.errorMessage.payload[0].message default error.description default 'Unknown error']&quot;,&#10;	&quot;timestamp&quot;: &quot;#[now()]&quot;&#10;}]" />
+	</sub-flow>
+</mule>

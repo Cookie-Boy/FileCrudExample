@@ -1,0 +1,107 @@
+[
+  {
+    "id": 100,
+    "model": "Corolla",
+    "mark": "Toyota",
+    "year": 1998,
+    "price": 400000
+  },
+  {
+    "id": 2,
+    "model": "Camry",
+    "mark": "Toyota",
+    "year": 2014,
+    "price": 2100000
+  },
+  {
+    "id": 3,
+    "model": "Rio",
+    "mark": "Kia",
+    "year": 2016,
+    "price": 700000
+  },
+  {
+    "id": 4,
+    "model": "Civic",
+    "mark": "Honda",
+    "year": 2012,
+    "price": 800000
+  },
+  {
+    "id": 5,
+    "model": "Accord",
+    "mark": "Honda",
+    "year": 2018,
+    "price": 1500000
+  },
+  {
+    "id": 6,
+    "model": "Focus",
+    "mark": "Ford",
+    "year": 2013,
+    "price": 850000
+  },
+  {
+    "id": 7,
+    "model": "Mustang",
+    "mark": "Ford",
+    "year": 2020,
+    "price": 3500000
+  },
+  {
+    "id": 8,
+    "model": "3",
+    "mark": "Mazda",
+    "year": 2015,
+    "price": 950000
+  },
+  {
+    "id": 9,
+    "model": "CX-5",
+    "mark": "Mazda",
+    "year": 2019,
+    "price": 1900000
+  },
+  {
+    "id": 10,
+    "model": "A4",
+    "mark": "Audi",
+    "year": 2017,
+    "price": 2300000
+  },
+  {
+    "id": 11,
+    "model": "A6",
+    "mark": "Audi",
+    "year": 2021,
+    "price": 3300000
+  },
+  {
+    "id": 12,
+    "model": "X5",
+    "mark": "BMW",
+    "year": 2016,
+    "price": 2700000
+  },
+  {
+    "id": 13,
+    "model": "320i",
+    "mark": "BMW",
+    "year": 2019,
+    "price": 2400000
+  },
+  {
+    "id": 14,
+    "model": "Octavia",
+    "mark": "Skoda",
+    "year": 2014,
+    "price": 1100000
+  },
+  {
+    "id": 15,
+    "model": "Superb",
+    "mark": "Skoda",
+    "year": 2020,
+    "price": 2000000
+  }
+]

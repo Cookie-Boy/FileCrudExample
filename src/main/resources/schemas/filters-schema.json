@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "model": {
+      "type": "string"
+    },
+    "mark": {
+      "type": "string"
+    },
+    "yearFrom": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "yearTo": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "priceFrom": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "priceTo": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    }
+  },
+  "additionalProperties": false
+}

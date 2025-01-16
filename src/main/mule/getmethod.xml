@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json"
+	xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<global-property doc:name="Global Property" doc:id="33c74d1b-ac52-4ff1-9682-93cfb11734fd" name="numericValues" value='["id", "yearFrom", "yearTo", "priceFrom", "priceTo"]' />
+	<sub-flow name="getSubFlow" doc:id="36370550-b828-4987-b6e2-3c7e79eacd61" >
+		<logger level="INFO" doc:name="[INFO] Start of filters validation" doc:id="b531b18e-c0c8-42ab-8072-a9da51dd3811" message="[GET_METHOD] Start of filters validation: #[payload]" />
+		<try doc:name="Try" doc:id="cf5003fb-aea9-48ce-904e-07af5cd0643d" >
+			<json:validate-schema doc:name="Validate parameters" doc:id="330dd61f-1705-41a9-8e92-690e1c92dc33" schema="schemas/filters-schema.json">
+			<json:content><![CDATA[#[output application/json
+---
+payload]]]></json:content>
+		</json:validate-schema>
+			<error-handler >
+				<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="f7077723-be54-4453-8960-72dc2089fc8d" >
+					<set-variable value="400" doc:name="httpStatus" doc:id="017ce190-9bc3-488c-866e-1f30b5a38412" variableName="httpStatus" />
+				</on-error-propagate>
+			</error-handler>
+		</try>
+		<logger level="INFO" doc:name="[INFO] End of filters validation" doc:id="126ab780-ff26-4e1c-a043-4ddf279ba88c" message="[GET_METHOD] End of filters validation" />
+		<set-variable value="#[output application/json&#10;---&#10;{&#10;	id: payload.id as Number default null,&#10;	model: payload.model default null,&#10;	mark: payload.mark default null,&#10;	yearFrom: payload.yearFrom as Number default null,&#10;	yearTo: payload.yearTo as Number default null,&#10;	priceFrom: payload.priceFrom as Number default null,&#10;	priceTo: payload.priceTo as Number default null&#10;}]" doc:name="params" doc:id="74b6e98f-39f1-42b2-be31-e93a95127b88" variableName="params" mimeType="application/json" />
+		<logger level="INFO" doc:name="[INFO] Parameters as JSON" doc:id="b14dab7f-2d57-48b4-904f-93d5ee56dfde" message="Parameters as JSON: #[vars.params]"/>
+		<file:read doc:name="Read JSON File" doc:id="3adfc6ac-5eb0-4e58-a6ad-002e5764513e" config-ref="File_Config" path="#[p('app.json_file_path')]"/>
+		<set-payload value='#[import modules::GetMethod&#10;output application/json&#10;---&#10;GetMethod::getByProperties(payload as Array, vars.params)]' doc:name="Set result" doc:id="54fca21b-d55b-40fe-8aa2-4e55df7e5d6d" />
+	</sub-flow>
+</mule>

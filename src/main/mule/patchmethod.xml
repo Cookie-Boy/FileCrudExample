@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:file="http://www.mulesoft.org/schema/mule/file"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+	<sub-flow name="patchSubFlow" doc:id="e3f86057-e2a3-4bee-8c59-203d525b940b" >
+		<set-variable value="#[output application/json&#10;---&#10;payload]" doc:name="data" doc:id="15ed98de-6b3e-4da0-8a1c-17ed6ba7d404" variableName="data" />
+		<set-variable value="#[attributes.uriParams.id as Number]" doc:name="id" doc:id="28920162-4ecc-4531-bfd5-8f7c68ccacdb" variableName="id" />
+		<logger level="INFO" doc:name="[INFO] Start of validation with JSON schema" doc:id="c0e9e2c7-65ac-40e2-ac91-4a56cc7353ed" message="[PATCH_METHOD] Start of validation with JSON schema" />
+		<try doc:name="Try" doc:id="9f171872-72db-4881-84e3-b1cc225288a0" >
+			<json:validate-schema doc:name="Validate json car object" doc:id="08060023-dfd0-475e-94c0-8b4d8a154c92" schema="schemas/patch-schema.json">
+			<json:content><![CDATA[#[vars.data]]]></json:content>
+		</json:validate-schema>
+			<error-handler >
+				<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="8dff04bb-435a-4d2c-b3c2-fb9fa25b12c0" >
+					<set-variable value="400" doc:name="httpStatus" doc:id="ad2f0fbf-a940-4b07-9ac6-0ed52ff0a40a" variableName="httpStatus" />
+				</on-error-propagate>
+			</error-handler>
+		</try>
+		<logger level="INFO" doc:name="[INFO] End of validation with JSON schema" doc:id="ced6ed85-0da3-483f-b6b5-dac2ff311229" message="[PATCH_METHOD] End of validation with JSON schema" />
+		<set-variable value="#[vars.data.id]" doc:name="newId" doc:id="95c93151-041a-4a50-a840-40c66edd9c9f" variableName="newId" />
+		<file:read doc:name="Read cars" doc:id="fd8b6d28-2eb6-4aee-882e-2b42ee14916d" config-ref="File_Config" path="#[p('app.json_file_path')]" />
+		<logger level="INFO" doc:name="[INFO] Start of ID vaidation" doc:id="448058e5-2fb7-4e54-a0ac-f31ee720b64e" message="[PATCH_METHOD] Start of ID validation" />
+		<choice doc:name="Id validation" doc:id="f48c0f55-991a-45a2-995e-0c0f0667ba2d">
+			<when expression="#[!((payload as Array).id contains vars.id)]">
+				<set-variable value="404" doc:name="httpStatus" doc:id="12799919-f297-4e65-90be-44efa7d707d8" variableName="httpStatus" />
+				<raise-error doc:name="Id doesn't exist error" doc:id="35e58c4d-a6cc-44b3-828d-1fe3f67ee6f7" type="VALIDATION:ID_DOES_NOT_EXIST" description="#[&quot;Item with ID &quot; ++ vars.id ++&quot; doesn't exist&quot;]" />
+			</when>
+			<when expression="#[((payload as Array).id contains vars.newId)]">
+				<set-variable value="409" doc:name="httpStatus" doc:id="42fb0f24-92eb-4eeb-a661-c8083487c338" variableName="httpStatus" />
+				<raise-error doc:name="Id already exist error" doc:id="25c1b3ff-2159-481d-8e92-612c1ff9f43a" type="VALIDATION:ID_DOES_NOT_EXIST" description='#["Item with ID " ++ vars.newId ++" already exist"]' />
+			</when>
+		</choice>
+		<logger level="INFO" doc:name="[INFO] End of ID validation" doc:id="f3b3e799-8433-440a-8772-598364dedb76" message="[PATCH_METHOD] End of ID validation" />
+		<set-payload value="#[import modules::PatchMethod&#10;output application/json&#10;---&#10;PatchMethod::getUpdatedCars(payload as Array, vars.id, vars.data)]" doc:name="Update cars" doc:id="e752ebb7-20eb-46ca-8c16-c3d6d463a539" />
+		<file:write doc:name="Write cars" doc:id="07cb1a26-e297-4302-b862-8496a2a064fd" config-ref="File_Config" path="#[p('app.json_file_path')]" />
+		<set-payload value="#[output application/json&#10;---&#10;if (vars.newId != vars.id)&#10;	(payload as Array filter ((item) -&gt; item.id == vars.newId))[0]&#10;else&#10;	(payload as Array filter ((item) -&gt; item.id == vars.id))[0]]" doc:name="Set result" doc:id="ca7ea1ca-e620-4a2c-8ec8-f02cf23fc166" />
+	</sub-flow>
+</mule>

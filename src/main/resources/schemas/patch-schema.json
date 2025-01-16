@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "full-schema.json#/properties/id"
+    },
+    "model": {
+      "$ref": "full-schema.json#/properties/model"
+    },
+    "mark": {
+      "$ref": "full-schema.json#/properties/mark"
+    },
+    "year": {
+      "$ref": "full-schema.json#/properties/year"
+    },
+    "price": {
+      "$ref": "full-schema.json#/properties/price"
+    }
+  },
+  "additionalProperties": false
+}
